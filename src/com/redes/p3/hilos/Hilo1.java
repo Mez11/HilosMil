@@ -1,6 +1,9 @@
-package com.main;
+package com.redes.p3.hilos;
 
 import javax.print.attribute.standard.RequestingUserName;
+
+import com.redes.p3.algoritmos.Fibonacci;
+import com.redes.p3.algoritmos.Primo;
 
 public class Hilo1 implements Runnable {
 	//Declaracion de atributos de Hilo 1

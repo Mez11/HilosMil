@@ -1,7 +1,9 @@
-package com.main;
+package com.redes.p3.hilos;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.redes.p3.vista.HilosMilClass;
 
 public class HiloInterrupciones implements Runnable {
 	private static final Logger logger = LoggerFactory.getLogger( HiloInterrupciones.class );

@@ -1,4 +1,7 @@
-package com.main;
+package com.redes.p3.hilos;
+
+import com.redes.p3.algoritmos.Aleatorio;
+import com.redes.p3.algoritmos.Par;
 
 public class Hilo2 implements Runnable{
 	

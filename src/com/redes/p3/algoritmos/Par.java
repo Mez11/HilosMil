@@ -1,4 +1,4 @@
-package com.main;
+package com.redes.p3.algoritmos;
 
 public class Par {
 	

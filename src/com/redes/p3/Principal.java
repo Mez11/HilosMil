@@ -1,8 +1,10 @@
-package com.main;
+package com.redes.p3;
 
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.redes.p3.hilos.HiloInterrupciones;
 
 public class Principal {
 	private static final Logger logger = LoggerFactory.getLogger( Principal.class );

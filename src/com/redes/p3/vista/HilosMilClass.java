@@ -1,4 +1,4 @@
-package com.main;
+package com.redes.p3.vista;
 
 import java.awt.EventQueue;
 
