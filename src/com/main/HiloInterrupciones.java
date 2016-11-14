@@ -1,9 +1,10 @@
 package com.main;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
-public class HiloInterrupciones {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class HiloInterrupciones implements Runnable {
+	private static final Logger logger = LoggerFactory.getLogger( HiloInterrupciones.class );
 	HilosMilClass VHiloI=new HilosMilClass();
 	//Propiedades para archivo log--@.@.
 		private long time=0;
@@ -18,65 +19,42 @@ public class HiloInterrupciones {
 		//VHiloI.jTextArea1.append("Creando "+nombreHilo+"\n");
 	        crearLog("");
 	    }
-	    public void start(){
-	      // VHiloI.setVisible(true);
-	        estado="Ejecutable";
-	        crearLog("Inicio");
-	        //VHiloI.jTextArea1.append("Iniciando "+nombreHilo+"\n");
-		if (hilo == null) {
-	            hilo = new Thread ((Runnable) this, nombreHilo);
-	            hilo.start ();
-	    	}
+	    
+	    public void inicializarHilo( ){
+	    	// VHiloI.setVisible(true);
+	    	estado="Ejecutable";
+	    	crearLog("Inicio");
+	    	//VHiloI.jTextArea1.append("Iniciando "+nombreHilo+"\n");
+	    	//Se crea una nueva instancia
+	    	hilo = new Thread(this, nombreHilo);
+	    	//y se llama a su metodo "start"
+	    	hilo.start ();
 	    }
-		
-	    public void crearLog(Hilo2 A) {
-	        FileWriter fichero=null;
-	        PrintWriter pw=null;
-	        try{
-	            fichero=new FileWriter("./infoHilos.log",true);
-	            pw=new PrintWriter(fichero);
-	            pw.println(A.returnInfo());
-	            fichero.close();
-	        }catch(IOException e){
-	            System.err.println(e);
-	        }
+	    
+		//Nombres....
+	    public void crearLog(Hilo2 hilo2) {
+	    	logger.info( "Creando Log Hilo 2: {}", hilo2.returnInfo( ) );
 	    }
-
-	    public void crearLog(Hilo1 A) {
-	        FileWriter fichero=null;
-	    	PrintWriter pw=null;
-	    	try{
-		    fichero=new FileWriter("./infoHilos.log",true);
-		    pw=new PrintWriter(fichero);
-		    pw.println(A.returnInfo());
-		    fichero.close();
-		}catch(IOException e){
-	            System.err.println(e);
-		}
+	    
+	    //Nombres...
+	    public void crearLog(Hilo1 hilo1) {
+	    	logger.info( "Creando Log Hilo 1: {}", hilo1.returnInfo( ) );
 	    }
 	    
 	    public void crearLog(String aux){
-	        FileWriter fichero=null;
-	    	PrintWriter pw=null;
-	    	try{
-		    fichero=new FileWriter("./infoHilos.log",true);
-		    pw=new PrintWriter(fichero);
-		    pw.println("Nombre hilo: ["+nombreHilo+"] "+"ID hilo: ["+3+"] "+
-	            "Estado hilo: ["+estado+"] "+aux+"\n");
-		    fichero.close();
-		}catch(IOException e){
-	            System.err.println(e);
-		}
+	    	//"3" es un codigo harcode.. Imagino que el ID debe ser dinamico, no?--yo lo manejo 1 ,2 
+	    	logger.info( "Nombre hilo: [{}], ID hilo: [{}] Estado hilo: [{}]",
+	    			nombreHilo, 3, estado, aux );
 	    }
 	    
+	    @Override
 	    public void run() {
 	        //VHiloI.setVisible(true);
 	        //VHiloI.jLabel1.setText("Actividad en HiloInterrupciones");
 	        estado="Ejecutando";
-	        crearLog("");
-	    //Instancias @.@. de hilos    
-		Hilo1 Hilo_Secuencia1 = new Hilo1( "Hilo_Secuencia1");
-		Hilo2 Hilo_Secuencia2 = new Hilo2( "Hilo_Secuencia2");
+	        //Instancias @.@. de hilos    
+	        Hilo1 Hilo_Secuencia1 = new Hilo1( "Hilo_Secuencia1");
+	        Hilo2 Hilo_Secuencia2 = new Hilo2( "Hilo_Secuencia2");
 	        crearLog(Hilo_Secuencia1);
 	        crearLog(Hilo_Secuencia2);
 	    	Hilo_Secuencia1.start();
@@ -111,11 +89,4 @@ public class HiloInterrupciones {
 	        crearLog(Hilo_Secuencia2);
 	        crearLog("Numero maximo de interrupciones alcanzado");
 	    }
-	    
-	    public static void main(String args[]) {
-		HiloInterrupciones Hilo_Interrupciones= new HiloInterrupciones("Hilo_Interrupciones");
-	        Hilo_Interrupciones.start();
-	        
-	    }
-
 }
