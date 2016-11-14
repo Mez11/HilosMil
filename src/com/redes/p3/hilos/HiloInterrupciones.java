@@ -54,41 +54,41 @@ public class HiloInterrupciones implements Runnable {
 	        //VHiloI.setVisible(true);
 	        //VHiloI.jLabel1.setText("Actividad en HiloInterrupciones");
 	        estado="Ejecutando";
-	        //Instancias @.@. de hilos    
-	        Hilo1 Hilo_Secuencia1 = new Hilo1( "Hilo_Secuencia1");
-	        Hilo2 Hilo_Secuencia2 = new Hilo2( "Hilo_Secuencia2");
-	        crearLog(Hilo_Secuencia1);
-	        crearLog(Hilo_Secuencia2);
-	    	Hilo_Secuencia1.start();
-	        Hilo_Secuencia2.start();
-	        crearLog(Hilo_Secuencia1);
-	        crearLog(Hilo_Secuencia2);
+	        //Instancias @.@. de hilos
+	        Hilo1 hilo1 = new Hilo1( "Hilo_Secuencia1");
+	        Hilo2 hilo2 = new Hilo2( "Hilo_Secuencia2");
+	        crearLog(hilo1);
+	        crearLog(hilo2);
+	    	hilo1.start();
+	        hilo2.start();
+	        crearLog(hilo1);
+	        crearLog(hilo2);
 	        while(true){
 	            System.out.print("");
-	            if(Hilo_Secuencia1.returnTiempo()>=2000){
-	               // VHiloI.jTextArea1.append("Interrupcion "+Hilo_Secuencia1.returnName()+Hilo_Secuencia1.returnEjecutando()+"\n");
-	                Hilo_Secuencia1.pause();
-	                Hilo_Secuencia1.setTiempo();
-	                crearLog(Hilo_Secuencia1);
-	                crearLog("Hilo_Secuencia1 "+Hilo_Secuencia1.returnNi());
+	            if(hilo1.returnTiempo()>=2000){
+	               // VHiloI.jTextArea1.append("Interrupcion "+hilo1.returnName()+hilo1.returnEjecutando()+"\n");
+	                hilo1.pause();
+	                hilo1.setTiempo();
+	                crearLog(hilo1);
+	                crearLog("hilo1 "+hilo1.returnNi());
 	            }
-	            if(Hilo_Secuencia2.returnTiempo()>=3000){
-	                //VHiloI.jTextArea1.append("Interrupcion "+Hilo_Secuencia2.returnName()+Hilo_Secuencia2.returnEjecutando()+"\n");
-	                Hilo_Secuencia2.pause();
-	                Hilo_Secuencia2.setTiempo();
-	                crearLog(Hilo_Secuencia2);
-	                crearLog("Hilo_Secuencia2 "+Hilo_Secuencia2.returnNi());
+	            if(hilo2.returnTiempo()>=3000){
+	                //VHiloI.jTextArea1.append("Interrupcion "+hilo2.returnName()+hilo2.returnEjecutando()+"\n");
+	                hilo2.pause();
+	                hilo2.setTiempo();
+	                crearLog(hilo2);
+	                crearLog("hilo2 "+hilo2.returnNi());
 	            }
 	            //Numero de repeticiones de hilos 
-	            if(Hilo_Secuencia1.returnNi()==10){
-	                if(Hilo_Secuencia2.returnNi()==10)
+	            if(hilo1.returnNi()==10){
+	                if(hilo2.returnNi()==10)
 	                    break;
 	            }
 	        }
 	        //VHiloI.jTextArea1.append("Termina "+nombreHilo+"\n");
 	        estado="Finalizo";
-	        crearLog(Hilo_Secuencia1);
-	        crearLog(Hilo_Secuencia2);
+	        crearLog(hilo1);
+	        crearLog(hilo2);
 	        crearLog("Numero maximo de interrupciones alcanzado");
 	    }
 }
