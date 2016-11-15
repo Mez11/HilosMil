@@ -53,7 +53,7 @@ public class HiloInterrupciones implements Runnable {
 	        logger.info( "Hilo 1: {}", hilo1.returnInfo( ) );
 	        logger.info( "Hilo 2: {}", hilo2.returnInfo( ) );
 	        while(true){
-	            System.out.print("");
+	            
 	            if(hilo1.returnTiempo()>=2000){
 	               // VHiloI.jTextArea1.append("Interrupcion "+hilo1.returnName()+hilo1.returnEjecutando()+"\n");
 	                hilo1.pause();
