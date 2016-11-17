@@ -11,11 +11,18 @@ public class Principal {
 	private static final Logger logger = LoggerFactory.getLogger( Principal.class );
 	
 	public static void main(String[] args) {
-		logger.info( "Se llamara al hilo principal..." );
-		//HiloInterrupciones hiloInterrupciones= new HiloInterrupciones("Hilo_Interrupciones");
-    	//hiloInterrupciones.inicializarHilo( );
+		HiloInterrupciones hiloInterrupciones= null;
+		HilosMilClass ventana = null;
 		
-		new HilosMilClass( ).setVisible( true );
+		//Inicializar ventana
+		ventana = new HilosMilClass( );
+		//Inicializar hilos
+		logger.info( "Se llamara al hilo principal..." );
+		//Notese que HilosMilClass es una clase que "hereda" (implementa) a HilosListener
+    	hiloInterrupciones = new HiloInterrupciones( "Hilo_Interrupciones", ventana );
+    	hiloInterrupciones.inicializarHilo( );
+		//Mostrar ventana
+		ventana.desplegar();
 		
 	}//fin main
 }//fin class

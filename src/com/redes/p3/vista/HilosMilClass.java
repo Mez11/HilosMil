@@ -4,44 +4,60 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
-public class HilosMilClass {
+import com.redes.p3.algoritmos.HilosListener;
+
+public class HilosMilClass implements HilosListener {
 
 	private JFrame frame;
+	private JTextArea areaHilo1;
 
 	/**
-	 * M&eacute;todo para llamar al <code>setVisible</code>
-	 * del Frame.
-	 * @param isVisible
+	 * M&eacute;todo para desplegar la ventana
 	 * @see JFrame#setVisible(boolean)
 	 */
-	public void setVisible(boolean isVisible) {
-		frame.setVisible( isVisible );
+	public void desplegar( ) {
+		frame.setVisible( true );
 	}
 
-
-
-	/**
-	 * Create the application.
-	 */
-	public HilosMilClass() {
-		initialize();
-	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public HilosMilClass() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(67, 26, 127, 233);
-		frame.getContentPane().add(textArea);
+		areaHilo1 = new JTextArea();
+		areaHilo1.setBounds(67, 26, 127, 233);
+		frame.getContentPane().add( areaHilo1 );
 		
 		JLabel lblHilo = new JLabel("Hilo 1");
 		lblHilo.setBounds(12, 12, 50, 15);
 		frame.getContentPane().add(lblHilo);
 	}
-}
+
+	@Override
+	public void onNewFibonacci(int num) {
+		areaHilo1.append( "Fibonacci: " + num + "\n" );
+	}
+
+
+	@Override
+	public void onNewPrimo(int primo) {
+		areaHilo1.append( "Primo: " + primo + "\n" );
+	}
+
+
+	@Override
+	public void onNewRandom(int random) {
+		System.out.println( "Random :" + random);
+	}
+
+
+	@Override
+	public void onNewPar(int par) {
+		System.out.println( "Par: "  + par );
+	}
+}//end class

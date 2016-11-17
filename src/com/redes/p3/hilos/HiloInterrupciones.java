@@ -3,6 +3,7 @@ package com.redes.p3.hilos;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.redes.p3.algoritmos.HilosListener;
 import com.redes.p3.vista.HilosMilClass;
 
 public class HiloInterrupciones implements Runnable {
@@ -12,9 +13,12 @@ public class HiloInterrupciones implements Runnable {
 	private Thread hilo;
 	private String estado;
 	private String nombreHilo;
+	//Objeto "listener" para avisar de cambios en los hilos
+	private HilosListener listener;
 
-	public HiloInterrupciones(String nombre){
+	public HiloInterrupciones(String nombre, HilosListener listener ){
 		//VHiloI.setVisible(true);
+		this.listener = listener;
 		nombreHilo=nombre;
 		estado="Nacido";
 		//VHiloI.jTextArea1.append("Creando "+nombreHilo+"\n");
@@ -43,8 +47,8 @@ public class HiloInterrupciones implements Runnable {
 		//VHiloI.jLabel1.setText("Actividad en HiloInterrupciones");
 		estado="Ejecutando";
 		//Instancias @.@. de hilos
-		Hilo1 hilo1 = new Hilo1( "Hilo_Secuencia1" );
-		Hilo2 hilo2 = new Hilo2( "Hilo_Secuencia2" );
+		Hilo1 hilo1 = new Hilo1( "Hilo_Secuencia1", listener );
+		Hilo2 hilo2 = new Hilo2( "Hilo_Secuencia2", listener );
 		logger.info( "Hilo 1: {}", hilo1.returnInfo( ) );
 		logger.info( "Hilo 2: {}", hilo2.returnInfo( ) );
 		hilo1.start();
