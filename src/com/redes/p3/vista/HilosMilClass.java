@@ -11,6 +11,7 @@ public class HilosMilClass implements HilosListener {
 
 	private JFrame frame;
 	private JTextArea areaHilo1;
+	private JTextArea areaHilo2;
 
 	/**
 	 * M&eacute;todo para desplegar la ventana
@@ -32,9 +33,15 @@ public class HilosMilClass implements HilosListener {
 		
 		areaHilo1 = new JTextArea();
 		
+		
 		JScrollPane scroll1 = new JScrollPane( areaHilo1 );
 		scroll1.setBounds(67, 26, 127, 233);
 		frame.getContentPane( ).add( scroll1 );
+		
+		areaHilo2 = new JTextArea();
+		JScrollPane scroll2 = new JScrollPane( areaHilo2 );
+		scroll2.setBounds( 267, 26, 127, 233 );
+		frame.getContentPane( ).add( scroll2 );
 		
 		JLabel lblHilo = new JLabel("Hilo 1");
 		lblHilo.setBounds(12, 12, 50, 15);
@@ -55,12 +62,21 @@ public class HilosMilClass implements HilosListener {
 
 	@Override
 	public void onNewRandom(int random) {
-		System.out.println( "Random :" + random);
+		
+		areaHilo2.append("Ramdom:"+ random + "\n" );
+		//System.out.println( "Random :" + random);
 	}
 
 
 	@Override
 	public void onNewPar(int par) {
-		System.out.println( "Par: "  + par );
+		areaHilo2.append("Par:"+ par + "\n");
+		//System.out.println( "Par: "  + par );
+	}
+
+
+	@Override
+	public void onHiloInterrumpido(String nombreHilo) {
+		System.out.println( "Interrumpcion generada en " + nombreHilo );
 	}
 }//end class
