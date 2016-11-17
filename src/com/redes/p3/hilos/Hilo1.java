@@ -32,7 +32,7 @@ public class Hilo1 implements Runnable {
 		tiempo=0;
 	}//end Hilo1
 	
-	public  String returnName(){
+	public  String getName(){
 		return nombreHilo;
 	}
 	public int returnId(){
@@ -62,7 +62,7 @@ public class Hilo1 implements Runnable {
 		return nFib;
 	}
 	public String returnInfo(){
-		info= "Nombre hilo: ["+returnName()+"] "+"ID hilo: ["+returnId()+"] "+
+		info= "Nombre hilo: ["+getName()+"] "+"ID hilo: ["+returnId()+"] "+
 				"Estado hilo: ["+obtenerEsatado()+"] "+"Nombre de secuencia: ["+returnEjecutando()+"]";
 		return info;
 	}//end returnInfo
@@ -75,45 +75,59 @@ public class Hilo1 implements Runnable {
 		}
 	}
 
+	private boolean necesitamosCalcularPrimo(  ){
+		return ni % 2 == 1;
+	}
+	
+	private void calcularPrimo( ){
+		for(int i=obtenernPrim();i<1000; i++){
+			if(returnNi()%2==1){
+				try{
+					long timeIni=System.currentTimeMillis();
+					//Avisar al listener que se calculo un nuevo primo
+					listener.onNewPrimo( P.calcularPrimo( i ) );
+					Thread.sleep(300);
+					nPrim=i;
+					long timeFin=System.currentTimeMillis();
+					tiempo=tiempo+(timeFin-timeIni);
+
+				}catch(InterruptedException e){
+					System.out.println("Hilo interrumpido");
+				}
+			}else{
+				break;
+			}
+		}
+	}
+	
+	private void calcularFibonacci( int i ){
+		try{
+			long timeIni=System.currentTimeMillis();
+			//VHilo1.jTextArea1.append(F.imprimirFibo(i)+"\n");
+			//Avisar al listener que un nuevo fibonacci ha sido calculado
+			listener.onNewFibonacci( F.imprimirFibo( i ) );
+			Thread.sleep( 300 );
+			nFib=i;
+			long timeFin=System.currentTimeMillis();
+			tiempo=tiempo+(timeFin-timeIni);
+		}catch(InterruptedException e){
+			System.out.println("Hilo interrumpido");
+		}
+	}
+	
 	@Override
 	public void run() {
 		estado="Ejecutando";
-		while(returnNi()<=9){
+		while( ni <= 9){
 			//Switch
-			if(returnNi()%2==1){
-				for(int i=obtenernPrim();i<1000; i++){
-					if(returnNi()%2==1){
-						try{
-							long timeIni=System.currentTimeMillis();
-							//Avisar al listener que se calculo un nuevo primo
-							listener.onNewPrimo( P.calcularPrimo( i ) );
-							Thread.sleep(300);
-							nPrim=i;
-							long timeFin=System.currentTimeMillis();
-							tiempo=tiempo+(timeFin-timeIni);
-
-						}catch(InterruptedException e){
-							System.out.println("Hilo interrumpido");
-						}
-					}else{
-						break;
-					}
-				}
+			if( necesitamosCalcularPrimo( ) ){
+				listener.onHiloInterrumpido(  "[" + nombreHilo + "] Calculando Primo" );
+				calcularPrimo( );
 			}else{
-				for(int i=obtenernFib();;i++){
-					if(returnNi()%2==0){
-						try{
-							long timeIni=System.currentTimeMillis();
-							//VHilo1.jTextArea1.append(F.imprimirFibo(i)+"\n");
-							//Avisar al listener que un nuevo fibonacci ha sido calculado
-							listener.onNewFibonacci( F.imprimirFibo( i ) );
-							Thread.sleep(300);
-							nFib=i;
-							long timeFin=System.currentTimeMillis();
-							tiempo=tiempo+(timeFin-timeIni);
-						}catch(InterruptedException e){
-							System.out.println("Hilo interrumpido");
-						}
+				listener.onHiloInterrumpido(  "[" + nombreHilo + "] Calculando Fibonacci" );
+				for( int i=obtenernFib( ); ; i++ ){
+					if( !necesitamosCalcularPrimo( ) ){
+						calcularFibonacci( i );
 					}else{
 						break;
 					}
