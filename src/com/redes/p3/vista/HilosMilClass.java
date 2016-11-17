@@ -2,6 +2,7 @@ package com.redes.p3.vista;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import com.redes.p3.algoritmos.HilosListener;
@@ -30,8 +31,10 @@ public class HilosMilClass implements HilosListener {
 		frame.getContentPane().setLayout(null);
 		
 		areaHilo1 = new JTextArea();
-		areaHilo1.setBounds(67, 26, 127, 233);
-		frame.getContentPane().add( areaHilo1 );
+		
+		JScrollPane scroll1 = new JScrollPane( areaHilo1 );
+		scroll1.setBounds(67, 26, 127, 233);
+		frame.getContentPane( ).add( scroll1 );
 		
 		JLabel lblHilo = new JLabel("Hilo 1");
 		lblHilo.setBounds(12, 12, 50, 15);
