@@ -1,30 +1,24 @@
 package com.redes.p3.vista;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import javax.swing.JTextArea;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 public class HilosMilClass {
 
 	private JFrame frame;
 
 	/**
-	 * Launch the application.
+	 * M&eacute;todo para llamar al <code>setVisible</code>
+	 * del Frame.
+	 * @param isVisible
+	 * @see JFrame#setVisible(boolean)
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					HilosMilClass window = new HilosMilClass();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public void setVisible(boolean isVisible) {
+		frame.setVisible( isVisible );
 	}
+
+
 
 	/**
 	 * Create the application.
