@@ -13,4 +13,6 @@ public interface HilosListener {
 	public void onNewRandom( int random );
 	
 	public void onNewPar( int par );
+	
+	public void onHiloInterrumpido( String nombreHilo );
 }

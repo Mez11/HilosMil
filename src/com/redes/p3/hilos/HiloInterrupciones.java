@@ -9,6 +9,7 @@ import com.redes.p3.vista.HilosMilClass;
 public class HiloInterrupciones implements Runnable {
 	private static final Logger logger = LoggerFactory.getLogger( HiloInterrupciones.class );
 	HilosMilClass VHiloI=new HilosMilClass();
+
 	//Propiedades para archivo log--@.@.
 	private Thread hilo;
 	private String estado;

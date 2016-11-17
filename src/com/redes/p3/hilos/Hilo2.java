@@ -15,6 +15,7 @@ public class Hilo2 implements Runnable{
 	private int nPar;
 	private long tiempo;
 	private String info;
+	//Listener para la interfaz
 	private HilosListener listener;
 
 	public Hilo2(String nombre, HilosListener listener ){
@@ -23,13 +24,14 @@ public class Hilo2 implements Runnable{
 		ni=0;
 		//VHilo2.jTextArea1.append("Creando "+nombreHilo+"\n");
 		this.listener = listener;
+		//Instancias Algoritmos
 		A= new Aleatorio();
 		P= new Par();
 		estado="Iniciado";
 		nPar=0;
 		tiempo=0;
 		//it=0;
-	}
+	}//end Hilo2 
 
 	public String returnName(){
 		return nombreHilo;
